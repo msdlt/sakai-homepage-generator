@@ -1,6 +1,8 @@
 # sakai-homepage-generator
 Client-side script to generate MSD-style Sakai (WebLearn at Oxford) homepages from a 'Homepage' directory structure in Resources
 
+![Homepage generator screenshot](/AutoHome.png)
+
 ## Install
 Copy into root of **Resources** folder:
 * Portal folder containing this code
@@ -20,5 +22,5 @@ In msd_config.js, change:
       * url is a an external (non-WebLearn) link, `target="_blank"`
       * url is a WebLearn (internal) link, `target="_self"` (i.e. within frameset)
       * url is a WebLearn (internal) link && the description field for the url contains **_top**, `target="_top"`
-  * An **Image** folder will create a `<img class="img-responsive column-image" src="">` in that column where src= path to the image contained in the folder
+  * An **Image** folder will create a `<img class="img-responsive column-image" src="">` in that column where src= path to the image contained in the folder. If you add a description to your image (**Edit Details**),for e.g atribution, that description (which may include html sich as links) will appear when a user hovers over the image.
 
