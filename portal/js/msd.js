@@ -13,7 +13,7 @@ function createPage(){
     		var output = "";
     		var home_page_index = 0;
     		if(data.content_collection[0].resourceChildren.length == 0) {	//If top level folder is empty
-				output += 'There\'s nothing here, but you can <a style="text-decoration: underline;" href="javascript: load_upload_overlay(\'' + data.content_collection[0].url + '\');">upload a file</a> or <a style="text-decoration: underline;" href="javascript: load_folder_overlay(\'' + data.content_collection[0].url + '\');">create a folder</a>.';
+				output += 'Empty';
 				$('#msd_portal').html(output);
 			 	}
 			else{
@@ -28,7 +28,11 @@ function createPage(){
 						if(objectName.toLowerCase().indexOf('image') != -1){
 							//find an image in the child of this folder?
 							if(val["resourceChildren"].length>0 && val["resourceChildren"][0]['type']=='org.sakaiproject.content.types.fileUpload'){
-								$('#msd_banner_image').append('<img class="img-responsive" src="'+val["resourceChildren"][0]['url']+'"></img>');
+								var description = "";
+								if(val["resourceChildren"][0]['description'] !="" && val["resourceChildren"][0]['description'] !=null){
+									description = val["resourceChildren"][0]['description'];
+									}
+								$('#msd_banner_image').append('<img class="img-responsive" src="'+val["resourceChildren"][0]['url']+'"/><div class="caption"><div class="caption-text"><p class="caption-text-content">'+description+'</p></div></div>');
 								}
 							}	
 						}
@@ -51,7 +55,11 @@ function traverseFolder(jsonObj, childOfColumn) {
         	if(objectName.toLowerCase().indexOf('image') != -1 && childOfColumn==true){
 				//we're an image in a column
 				if(val["resourceChildren"].length>0 && val["resourceChildren"][0]['type']=='org.sakaiproject.content.types.fileUpload'){
-					output += '<img class="img-responsive column-image" src="'+val["resourceChildren"][0]['url']+'"></img>';
+					var description = "";
+					if(val["resourceChildren"][0]['description'] !="" && val["resourceChildren"][0]['description'] !=null){
+						description = val["resourceChildren"][0]['description'];
+						}
+					output += '<div class="row"><div class="col-sm-12"><img class="img-responsive column-image" src="'+val["resourceChildren"][0]['url']+'"><div class="caption"><div class="caption-text"><p class="caption-text-content">'+description+'</p></div></div></div></div>';
 					}
             	}
         	else if(childOfColumn==true){
