@@ -79,6 +79,7 @@ function traverseFolder(jsonObj, childOfColumn) {
             	}
             else if(objectName.toLowerCase().indexOf('image') == -1){ //link
             	var target="_top"; //default
+				var indented=false;
             	if(val["url"].indexOf('__weblearn') == -1){
 					target="_blank"; //external link so _blank
             		}
@@ -86,8 +87,16 @@ function traverseFolder(jsonObj, childOfColumn) {
 					if(val["description"].indexOf('_top') == -1){
 						target="_self"; //no '_top' in description so open in _self	
 						}
+					if(val["description"].indexOf('_indented') != -1){
+						indented=true; //_indented in description so apply class to li a below
+						}
 					}
-            	output += '<li><a target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
+            	if(indented){
+					output += '<li><a class="indented" target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
+					}
+				else{
+					output += '<li><a target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
+					}
             	}
             });
     	}
