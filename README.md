@@ -22,7 +22,7 @@ In msd_config.js, change:
       * url is a an external (non-WebLearn) link, `target="_blank"`
       * url is a WebLearn (internal) link, `target="_self"` (i.e. within frameset)
       * url is a WebLearn (internal) link && the description field for the url contains **_top**, `target="_top"`
-	  * description field for the url contains **\_frame\_###\_** (where ### is height of frame in pixels, the link will be inserted as a 100% width iframe of the specified height
+	  * description field for the url contains **\_frame\_###\_** (where ### is height of frame in pixels), the link will be inserted as a 100% width iframe of the specified height
     * If the description field contains `_indented`, the link will be indented by 15px (`<a class="indented">`)
   * An **Image** folder will create a `<img class="img-responsive column-image" src="">` in that column where src= path to the image contained in the folder. If you add a description to your image (**Edit Details**),for e.g atribution, that description (which may include html sich as links) will appear when a user hovers over the image.
 
