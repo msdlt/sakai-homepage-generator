@@ -80,24 +80,32 @@ function traverseFolder(jsonObj, childOfColumn) {
             else if(objectName.toLowerCase().indexOf('image') == -1){ //link
             	var target="_top"; //default
 				var indented=false;
-            	if(val["url"].indexOf('__weblearn') == -1){
-					target="_blank"; //external link so _blank
-            		}
-            	else{
-					if(val["description"].indexOf('_top') == -1){
-						target="_self"; //no '_top' in description so open in _self	
+				//Look for _frame in the description - expect _frame_###_ where ### is the height in pixels
+				if(val.description && val.description.indexOf('_frame') !== -1){
+					var heightStart = val.description.indexOf('_frame') + 7;
+					var heightEnd = val.description.indexOf('_', heightStart);
+					var height = parseInt(val.description.substring(heightStart, heightEnd))
+					output += '<iframe src="' + val["url"] + '" title="'+val["name"]+'" style="height:' + height + 'px; width: 100%; border: none;">Your browser does not support frames</iframe>';
+				}
+            	else {
+					if(val["url"].indexOf('__weblearn') == -1){
+						target="_blank"; //external link so _blank
 						}
-					if(val["description"].indexOf('_indented') != -1){
-						indented=true; //_indented in description so apply class to li a below
+					else{
+						if(val.description && val["description"].indexOf('_top') == -1){
+							target="_self"; //no '_top' in description so open in _self	
+							}
+						if(val.description && val["description"].indexOf('_indented') != -1){
+							indented=true; //_indented in description so apply class to li a below
+							}
 						}
-					}
-            	if(indented){
-					output += '<li><a class="indented" target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
-					}
-				else{
-					output += '<li><a target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
-					}
-            	}
+					if(indented){
+						output += '<li><a class="indented" target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
+						}
+					else{
+						output += '<li><a target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
+						}
+				}
             });
     	}
     else {
