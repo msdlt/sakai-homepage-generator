@@ -92,10 +92,10 @@ function traverseFolder(jsonObj, childOfColumn) {
 						target="_blank"; //external link so _blank
 						}
 					else{
-						if(val.description && val["description"].indexOf('_top') == -1){
+						if(val["description"].indexOf('_top') == -1){
 							target="_self"; //no '_top' in description so open in _self	
 							}
-						if(val.description && val["description"].indexOf('_indented') != -1){
+						if(val["description"].indexOf('_indented') != -1){
 							indented=true; //_indented in description so apply class to li a below
 							}
 						}
