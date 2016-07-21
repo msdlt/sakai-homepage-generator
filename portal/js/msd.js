@@ -99,6 +99,9 @@ function traverseFolder(jsonObj, childOfColumn) {
                                 indented=true; //_indented in description so apply class to li a below
                                 }
                             }
+                        if(val["url"].indexOf('__weblearn') == -1){
+                            target="_blank"; //external link so _blank
+                        }
                         }
                     else{
                         target="_blank"; //external link so _blank
