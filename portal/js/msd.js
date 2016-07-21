@@ -78,17 +78,32 @@ function traverseFolder(jsonObj, childOfColumn) {
 				output += '</div>';
             	}
             else if(objectName.toLowerCase().indexOf('image') == -1){ //link
-            	var target="_top"; //default
-				var indented=false;
+            	var indented=false;
 				//Look for _frame in the description - expect _frame_###_ where ### is the height in pixels
 				if(val.description && val.description.indexOf('_frame') !== -1){
 					var heightStart = val.description.indexOf('_frame') + 7;
 					var heightEnd = val.description.indexOf('_', heightStart);
 					var height = parseInt(val.description.substring(heightStart, heightEnd))
 					output += '<iframe src="' + val["url"] + '" title="'+val["name"]+'" style="height:' + height + 'px; width: 100%; border: none;">Your browser does not support frames</iframe>';
-				}
+				    }
             	else {
-					if(val["url"].indexOf('__weblearn') == -1){
+					var extension = getExtension(val["url"]);
+                    var target="_self"; //default
+                    if(extension.toLowerCase()=='url' || extension=='' || extension.toLowerCase()=='html'){
+                        //we're talking internal links so show in _self unless
+                        if(typeof val["description"] != 'undefined' && val["description"] != null){
+                            if(val["description"].indexOf('_top') != -1){
+                                target="_top"; // '_top' in description so open in _top	
+                                }
+                            if(val["description"].indexOf('_indented') != -1){
+                                indented=true; //_indented in description so apply class to li a below
+                                }
+                            }
+                        }
+                    else{
+                        target="_blank"; //external link so _blank
+                        }
+                    /*if(val["url"].indexOf('__weblearn') == -1){
 						target="_blank"; //external link so _blank
 						}
 					else{
@@ -98,7 +113,7 @@ function traverseFolder(jsonObj, childOfColumn) {
 						if(val["description"].indexOf('_indented') != -1){
 							indented=true; //_indented in description so apply class to li a below
 							}
-						}
+						}*/
 					if(indented){
 						output += '<li><a class="indented" target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
 						}
@@ -106,10 +121,22 @@ function traverseFolder(jsonObj, childOfColumn) {
 						output += '<li><a target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
 						}
 				}
-            });
-    	}
+			}
+		});
+	}
     else {
         // jsonOb is a number or string
-    	}
+	}
     return output;
 }
+
+function getExtension(path) {
+    var basename = path.split(/[\\/]/).pop(),  // extract file name from full path ...
+                                               // (supports `\\` and `/` separators)
+        pos = basename.lastIndexOf(".");       // get last position of `.`
+
+    if (basename === "" || pos < 1)            // if file name is empty or ...
+        return "";                             //  `.` not found (-1) or comes first (0)
+
+    return basename.slice(pos + 1);            // extract extension ignoring `.`
+    }
