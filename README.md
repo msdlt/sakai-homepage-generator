@@ -16,6 +16,7 @@ In msd_config.js, change:
 ## Create folder structure
 * **Home page** top-level directory to contain strucure
 * Under this add columns - folders called **Column 1**, **Column 2**, etc. Note you you can only have a number which is a divisor of 12 ie 12, 6, 4, 3, or 2.
+	* If you are putting content folders underneath your column headings (rather than just links), then in each column folder you should put the file called index-column-redirect.html and rename it to index.html. Then, when someone navigates up the WebLearn folder tree (using the "Up one level" button), when they get to the column folder they will be sent to the home page, rather than seeing the innards of the home page generator.
 * Under each column, add folders:
   * A **My heading name** folder will create a `<h3>My heading name</h3>` in that column
     * Web links within this folder will be converted to `<li><a href="url" target="_self">Test resources folder</a></li>`. If:

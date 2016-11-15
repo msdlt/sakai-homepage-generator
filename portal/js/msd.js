@@ -63,12 +63,17 @@ function traverseFolder(jsonObj, childOfColumn) {
 					}
             	}
         	else if(childOfColumn==true){
-        		output += '<h3>'+val["name"]+'</h3>'; //heading
-        		output += '<ul class="menuitems">';
-        		childOfColumn = false;
-        		output += traverseFolder(val, childOfColumn);
-        		childOfColumn = true;
-        		output += '</ul>';
+				if(objectName.toLowerCase() === 'index.html') {
+					//This is an index.html page for redirecting, so skip it
+					}
+				else {
+					output += '<h3>'+val["name"]+'</h3>'; //heading
+					output += '<ul class="menuitems">';
+					childOfColumn = false;
+					output += traverseFolder(val, childOfColumn);
+					childOfColumn = true;
+					output += '</ul>';
+					}
         		}
             else if(objectName.toLowerCase().indexOf('column') != -1){
 				output += '<div class="col-sm-'+gridsPerColumn+'">';  //top level column definition folders
