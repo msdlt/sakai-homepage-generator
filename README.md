@@ -5,7 +5,7 @@ Client-side script to generate MSD-style Sakai (WebLearn at Oxford) homepages fr
 
 ## Install
 Copy into root of **Resources** folder:
-* Portal folder containing this code
+* Portal folder containing this code (you can upload portal.zip and then unzip it)
 * Index.html
 
 ## Configure
@@ -14,10 +14,11 @@ In msd_config.js, change:
   var this_site_id = "1e22f33c-4567-8a9d-a0d1-2a3bdd4d5ab6";  //Update this with your site's ID
   ```
 ## Create folder structure
-* **Home page** top-level directory to contain strucure
-* Under this add columns - folders called **Column 1**, **Column 2**, etc. Note you you can only have a number which is a divisor of 12 ie 12, 6, 4, 3, or 2.
+Instead of steps 1 & 2, you can just upload "Home page.zip" and then unzip to generate a standard 3-column layout, with index.html files for redirection in each column.
+1. **Home page** top-level directory to contain strucure
+2.  Under this add columns - folders called **Column 1**, **Column 2**, etc. Note you you can only have a number which is a divisor of 12 ie 12, 6, 4, 3, or 2.
 	* If you are putting content folders underneath your column headings (rather than just links), then in each column folder you should put the file called index-column-redirect.html and rename it to index.html. Then, when someone navigates up the WebLearn folder tree (using the "Up one level" button), when they get to the column folder they will be sent to the home page, rather than seeing the innards of the home page generator.
-* Under each column, add folders:
+3. Under each column, add folders:
   * A **My heading name** folder will create a `<h3>My heading name</h3>` in that column
     * Web links within this folder will be converted to `<li><a href="url" target="_self">Test resources folder</a></li>`. If:
       * url is a an external (non-WebLearn) link, `target="_blank"`
