@@ -104,7 +104,7 @@ function traverseFolder(jsonObj, childOfColumn) {
                                 indented=true; //_indented in description so apply class to li a below
                                 }
                             }
-                        if(val["url"].indexOf('__weblearn') == -1){
+                        if(val["url"].indexOf('__weblearn') == -1 && val["type"]!=="org.sakaiproject.content.types.HtmlDocumentType"){
                             target="_blank"; //external link so _blank
                         }
                         }
