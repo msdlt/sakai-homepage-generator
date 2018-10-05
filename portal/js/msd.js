@@ -94,9 +94,10 @@ function traverseFolder(jsonObj, childOfColumn) {
             	else {
 					var extension = getExtension(val["url"]);
                     var target="_self"; //default
-                    if(extension.toLowerCase()=='url' || extension=='' || extension.toLowerCase()=='html'){
+                    if(extension.toLowerCase()=='url' || extension=='' || extension.toLowerCase()=='html' || val["type"]=='org.sakaiproject.content.types.HtmlDocumentType'){
                         //we're talking internal links so show in _self unless
                         if(typeof val["description"] != 'undefined' && val["description"] != null){
+                            //we have a value in description to alter behaviour
                             if(val["description"].indexOf('_top') != -1){
                                 target="_top"; // '_top' in description so open in _top	
                                 }
@@ -107,22 +108,10 @@ function traverseFolder(jsonObj, childOfColumn) {
                         if(val["url"].indexOf('__weblearn') == -1 && val["type"]!=="org.sakaiproject.content.types.HtmlDocumentType"){
                             target="_blank"; //external link so _blank
                         }
-                        }
-                    else{
+                    } else {
                         target="_blank"; //external link so _blank
-                        }
-                    /*if(val["url"].indexOf('__weblearn') == -1){
-						target="_blank"; //external link so _blank
-						}
-					else{
-						if(val["description"].indexOf('_top') == -1){
-							target="_self"; //no '_top' in description so open in _self	
-							}
-						if(val["description"].indexOf('_indented') != -1){
-							indented=true; //_indented in description so apply class to li a below
-							}
-						}*/
-					if(indented){
+                    }
+                    if(indented){
 						output += '<li><a class="indented" target="'+target+'" href="'+val["url"]+'">'+val["name"]+'</a></li>';
 						}
 					else{
