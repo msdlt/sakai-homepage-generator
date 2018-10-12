@@ -115,7 +115,7 @@ color:#303030;
 .caption-text{
     position: absolute !important;
     height:50px;
-    width:100%;
+    width:calc(100% - 30px);
     bottom:0;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,7db9e8+100&amp;1+0,0+90 */
     background: -moz-linear-gradient(left,  rgba(0,0,0,1) 0%, rgba(113,167,209,0) 90%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
